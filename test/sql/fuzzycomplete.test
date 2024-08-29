@@ -4,25 +4,20 @@
 
 # Before we load the extension, this will fail
 statement error
-SELECT hilbert_encode([1, 2, 3]::tinyint[3]);
+SELECT * FROM sql_auto_complete('SEL');
 ----
-Catalog Error: Scalar Function with name hilbert_encode does not exist!
+Catalog Error: Table Function with name "sql_auto_complete" is not in the catalog, but it exists in the autocomplete extension.
 
 # Require statement will ensure this test is run with this extension loaded
 require fuzzycomplete
 
 # Confirm the extension works
 query I
-SELECT hilbert_encode([1, 2, 3]::tinyint[3]);
+SELECT trim(suggestion) from sql_auto_complete('SEL')
 ----
-22
+SELECT
 
 query I
-SELECT morton_encode([1, 2, 3]::tinyint[3]);
+SELECT suggestion from sql_auto_complete('SELECT * from tables') limit 1
 ----
-29
-
-query I
-select hilbert_decode(22::uinteger, 3, false, false)
-----
-[1, 2, 3]
+duckdb_tables
