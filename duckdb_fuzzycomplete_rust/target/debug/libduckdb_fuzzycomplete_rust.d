@@ -1,0 +1,1 @@
+/Users/rusty/Development/duckdb-fuzzycomplete-extension/duckdb_fuzzycomplete_rust/target/debug/libduckdb_fuzzycomplete_rust.a: /Users/rusty/Development/duckdb-fuzzycomplete-extension/duckdb_fuzzycomplete_rust/src/lib.rs
