@@ -594,10 +594,15 @@ namespace duckdb
 
 	static void LoadInternal(DatabaseInstance &db)
 	{
-		TableFunction auto_complete_fun("sql_auto_complete", {LogicalType::VARCHAR}, SQLFuzzyCompleteFunction,
-																		SQLFuzzyCompleteBind, SQLFuzzyCompleteInit);
-		ExtensionUtil::RegisterFunction(db, auto_complete_fun);
+		// For now just only load if the autocomplete extension isn't loaded.
+		// there are plans to improve this in the future.
+		if (!db.ExtensionIsLoaded("autocomplete")) {
+			TableFunction auto_complete_fun("sql_auto_complete", {LogicalType::VARCHAR}, SQLFuzzyCompleteFunction,
+																			SQLFuzzyCompleteBind, SQLFuzzyCompleteInit);
+			ExtensionUtil::RegisterFunction(db, auto_complete_fun);
+		}
 	}
+
 	void FuzzycompleteExtension::Load(DuckDB &db)
 	{
 		LoadInternal(*db.instance);
