@@ -2,17 +2,17 @@
 
 ![A duck trying to complete a crossword puzzle](./docs/duckdb-fuzzycompletion.jpeg)
 
-This `fuzzycomplete` extension serves as an alternative to DuckDB's autocomplete extension, with several key differences:
+This `fuzzycomplete` extension serves as an alternative to DuckDB's [autocomplete](https://duckdb.org/docs/api/cli/autocomplete.html) extension, with several key differences:
 
-**Algorithm:** Unlike the autocomplete extension, which uses edit distance as its metric, the fuzzycomplete extension employs a fuzzy string matching algorithm derived from Visual Studio Code. This provides more intuitive and flexible completion suggestions.
+**Algorithm:** Unlike the [autocomplete extension](https://duckdb.org/docs/extensions/autocomplete.html), which uses edit distance as its metric, the fuzzycomplete extension employs a fuzzy string matching algorithm derived from Visual Studio Code. This provides more intuitive and flexible completion suggestions.
 
-**Scope:** The fuzzycomplete extension can complete table names across different databases and schemas. It respects the current search path and offers suggestions accordingly, even when multiple databases are attached.
+**Scope:** The `fuzzycomplete` extension can complete table names across different databases and schemas. It respects the current search path and offers suggestions accordingly, even when multiple databases are attached.
 
-It may not yet be the best solution, but it was useful to the author.
+It may not yet be the best solution for SQL completion, but it has proven to be useful to the author.
 
 ## Installation
 
-**`fuzzycomplete` will soon be a [DuckDB Community Extension](https://github.com/duckdb/community-extensions).**
+**`fuzzycomplete` will hopefully soon be a [DuckDB Community Extension](https://github.com/duckdb/community-extensions).**
 
 You can now use this by using this SQL:
 
