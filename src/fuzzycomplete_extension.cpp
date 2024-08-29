@@ -356,7 +356,7 @@ namespace duckdb
 
 	static bool is_word_break(char c)
 	{
-		return StringUtil::CharacterIsOperator(c) and c != '.';
+		return StringUtil::CharacterIsOperator(c) && c != '.';
 	}
 
 	static duckdb::unique_ptr<SQLFuzzyCompleteFunctionData> GenerateSuggestions(ClientContext &context, const string &sql)
