@@ -69,12 +69,19 @@ namespace duckdb
 		std::vector<const char *> candidate_pool_pointers;
 		std::vector<const char *> suggestion_results(max_results);
 
-		candidate_pool_pointers.reserve(available_suggestions.size());
+		// Make sure all of the suggestions are unique.
 
-		// Fill the c_str_pointers vector with the addresses of the C-strings
+		std::set<shared_ptr<std::string>> unique_suggestions;
 		for (const auto &str : available_suggestions)
 		{
-			candidate_pool_pointers.push_back(str.candidate.c_str());
+			unique_suggestions.insert(make_shared_ptr<string>(str.candidate));
+		}
+
+		candidate_pool_pointers.reserve(unique_suggestions.size());
+
+		for (const auto &str : unique_suggestions)
+		{
+			candidate_pool_pointers.push_back(str->c_str());
 		}
 
 		// Get the suggestions from rust
@@ -82,7 +89,7 @@ namespace duckdb
 
 		perform_matches(
 				candidate_pool_pointers.data(),
-				available_suggestions.size(),
+				candidate_pool_pointers.size(),
 				prefix.c_str(),
 				prefix.size(),
 				max_results,
